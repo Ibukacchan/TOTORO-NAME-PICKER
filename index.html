@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#55765b">
+  <meta name="description" content="A cozy forest-themed student name picker with individual and group draws.">
+  <title>Little Forest Name Picker</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sky-glow"></div>
+  <div class="floating-leaves" aria-hidden="true">
+    <span>🍃</span><span>✿</span><span>🍃</span><span>✧</span><span>🍃</span>
+  </div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Little Forest Name Picker home">
+      <img src="assets/app-icon.svg" alt="" class="brand-icon">
+      <span><strong>Little Forest</strong><small>magical name picker</small></span>
+    </a>
+    <div class="sound-controls">
+      <button id="musicBtn" class="sound-btn" type="button" aria-pressed="false">♫ <span>Music Off</span></button>
+      <button id="sfxBtn" class="sound-btn active" type="button" aria-pressed="true">✧ <span>Sounds On</span></button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="tiny-star">✦</span> A LITTLE MAGIC FOR YOUR CLASSROOM</div>
+        <h1>Who will the<br><em>forest choose?</em></h1>
+        <p>Take a breath, make a little wish, and let the forest spirit choose today's star.</p>
+        <div class="hero-pills"><span>☁ Cozy classroom moments</span><span>🌱 Made for learning</span></div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of a friendly forest spirit beneath a tree">
+        <div class="sun-disc"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
+        <div class="tree tree-left"><i></i><b></b></div><div class="tree tree-right"><i></i><b></b></div>
+        <div class="hill hill-back"></div><div class="hill hill-front"></div>
+        <div class="spirit"><div class="ears"><i></i><b></b></div><div class="body-spirit"><div class="belly"></div><div class="eyes"><i></i><b></b></div><div class="whiskers left"></div><div class="whiskers right"></div><div class="cheeks"><i></i><b></b></div></div><div class="feet"><i></i><b></b></div></div>
+        <span class="sparkle s1">✧</span><span class="sparkle s2">✦</span><span class="sparkle s3">✧</span>
+        <span class="mushroom m1">🍄</span><span class="mushroom m2">🍄</span>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="main-card picker-card">
+        <div class="card-heading">
+          <div><span class="section-kicker">THE DRAWING CIRCLE</span><h2>Choose your magic</h2></div>
+          <div class="student-count"><span id="studentCount">16</span><small>students</small></div>
+        </div>
+        <div class="mode-tabs" role="tablist" aria-label="Selection mode">
+          <button class="mode-tab selected" id="individualTab" role="tab" aria-selected="true">✦ Individual</button>
+          <button class="mode-tab" id="groupTab" role="tab" aria-selected="false">❀ Groups</button>
+        </div>
+
+        <div id="individualPanel" class="mode-panel">
+          <div class="stage">
+            <div class="stage-orbit orbit-one"></div><div class="stage-orbit orbit-two"></div>
+            <div class="result-bubble">
+              <span class="result-label" id="resultLabel">THE FOREST IS THINKING...</span>
+              <div id="resultName" class="result-name">Ready?</div>
+              <div class="result-sub" id="resultSub">Tap the button to find your chosen one</div>
+            </div>
+            <div class="stage-spark spark-a">✧</div><div class="stage-spark spark-b">✦</div>
+          </div>
+          <div class="action-row">
+            <button id="pickBtn" class="primary-btn"><span>✦</span> Pick a student <span>→</span></button>
+            <button id="resetDrawBtn" class="round-btn" title="Reset picked students" aria-label="Reset picked students">↻</button>
+          </div>
+          <label class="toggle-line"><input type="checkbox" id="noRepeat" checked><span class="switch"></span><span><b>Don't pick the same student twice</b><small>Reset the draw when everyone has had a turn.</small></span></label>
+        </div>
+
+        <div id="groupPanel" class="mode-panel hidden">
+          <div class="group-settings">
+            <label>How many students in each group?
+              <div class="stepper"><button id="sizeMinus" type="button" aria-label="Decrease group size">−</button><strong id="groupSize">4</strong><button id="sizePlus" type="button" aria-label="Increase group size">+</button></div>
+            </label>
+            <button id="makeGroupsBtn" class="secondary-btn">✧ Create groups</button>
+          </div>
+          <div class="group-stage">
+            <div class="group-icon">🌿</div>
+            <span class="result-label">YOUR FOREST TEAMS</span>
+            <h3 id="groupResultTitle">Groups are waiting</h3>
+            <p id="groupHint">Create groups, then let the forest choose a team.</p>
+            <div id="groupsGrid" class="groups-grid"></div>
+          </div>
+          <div class="action-row">
+            <button id="pickGroupBtn" class="primary-btn"><span>✦</span> Pick a group <span>→</span></button>
+            <button id="shuffleGroupsBtn" class="round-btn" title="Shuffle groups" aria-label="Shuffle groups">↻</button>
+          </div>
+        </div>
+        <div class="history-strip"><span>🍂 RECENTLY CHOSEN</span><div id="historyList" class="history-list">Your picks will appear here</div></div>
+      </div>
+
+      <aside class="side-column">
+        <section class="main-card roster-card">
+          <div class="card-heading compact"><div><span class="section-kicker">YOUR CLASS</span><h2>Student list</h2></div><span class="leaf-badge">🌱</span></div>
+          <div class="roster-summary"><strong id="rosterTotal">16</strong><span>little forest friends</span></div>
+          <div class="roster-list" id="rosterList"></div>
+          <div class="add-student">
+            <input id="newStudent" type="text" maxlength="50" placeholder="Add a student's name..." aria-label="New student name">
+            <button id="addStudentBtn" type="button" aria-label="Add student">+</button>
+          </div>
+          <div class="roster-actions"><button id="editListBtn" class="text-btn">✎ Edit names</button><button id="clearPicksBtn" class="text-btn">↻ Reset picks</button></div>
+        </section>
+        <section class="tip-card"><div class="tip-icon">☁</div><div><b>A little forest tip</b><p>Turn on the gentle music, gather your class, and let every name have its moment in the sunshine.</p></div></section>
+      </aside>
+    </section>
+    <footer><span>Made with a little forest magic</span><span>🍃 Take care of each other, little spirits 🍃</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

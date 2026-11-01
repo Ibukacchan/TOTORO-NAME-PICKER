@@ -1,0 +1,12 @@
+{
+  "name": "Little Forest Name Picker",
+  "short_name": "Forest Picker",
+  "description": "A cozy forest-themed student name picker.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f8f8ed",
+  "theme_color": "#55765b",
+  "icons": [
+    {"src":"assets/app-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
